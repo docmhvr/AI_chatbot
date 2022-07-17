@@ -62,3 +62,25 @@ for x, doc in enumerate(docs_x):
 # converting lists to numpy arrays
 training = numpy.array(training)
 output = numpy.array(output)
+
+# building the model in tensorflow
+tensorflow.reset_default_graph()
+
+# input data
+net = tflearn.input_data(shape=[None, len(training[0])])
+
+# 2 hidden layers with 8 neurons
+net = tflearn.fully_connected(net, 8) 
+net = tflearn.fully_connected(net, 8)
+
+# fully connected layer and regression layer (probablity calculation using activation fucntion)
+# output layer with activation function (softmax)
+net = tflearn.fully_connected(net, len(output[0]), activation="softmax")
+net = tflearn.regression(net)
+
+# training model
+model = tflearn.DNN(net) 
+
+# saving model
+model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
+model.save("model.tflearn")

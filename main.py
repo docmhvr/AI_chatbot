@@ -119,6 +119,7 @@ def chat():
         if inp.lower() == "quit":
             break
 
+        # results give probablity of responses
         results = model.predict([bag_of_words(inp, words)])
         results_index = numpy.argmax(results)
         tag = labels[results_index]

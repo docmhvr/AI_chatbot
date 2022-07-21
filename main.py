@@ -130,4 +130,5 @@ def chat():
 
         print(random.choice(responses))
 
+# running the bot
 chat()
